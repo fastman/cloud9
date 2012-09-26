@@ -191,6 +191,15 @@ module.exports = ext.register("ext/console/console", {
         for (var o = 0; o < outputBlocks.length; /* empty */) {
             if (outputBlocks[0].className.indexOf("loaded") === -1) {
                 o++;
+                var logEl = outputBlocks[0].childNodes;
+                for (var i = 0; i < logEl.length; /* empty */) {
+                    /* log element does not have class and is a div */
+                    if (logEl[i].tagName !== 'DIV' || logEl[i].className !== "") {
+                        i++;
+                        continue;
+                    }
+                    logEl[i].parentNode.removeChild(logEl[i]);
+                }
                 continue;
             }
 
